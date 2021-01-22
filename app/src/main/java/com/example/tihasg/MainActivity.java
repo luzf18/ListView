@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Toast.makeText(this, "Seja Bem-Vindo", Toast.LENGTH_LONG).show();
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_principal);
         List<String> alunos = new ArrayList<>(
                 Arrays.asList("Ane Teles", "Felipe Rodrigues", "Fernanda Santos", "Luiz Fernando", "Rodrigo", "Tiago Rodrigues")) ;
         ListView ListaDeAlunos = findViewById(R.id.activity_main_Lista_De_Alunos);
