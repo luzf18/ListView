@@ -35,9 +35,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                         FormularioAlunoActivity.class));
             }
         });
-
         setTitle("Tihasg Mobile");
-
         ListView ListaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
         ListaDeAlunos.setAdapter(new ArrayAdapter<>(
                 this,
