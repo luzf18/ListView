@@ -60,6 +60,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     private void configuraLista() {
+
+        setTitle("Tihasg Mobile");
         ListView ListaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
         final List<Aluno> alunos = dao.todos();
         ListaDeAlunos.setAdapter(new ArrayAdapter<>(
