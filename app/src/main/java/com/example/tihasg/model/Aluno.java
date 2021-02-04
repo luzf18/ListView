@@ -1,6 +1,8 @@
 package com.example.tihasg.model;
 
-public class Aluno {
+import java.io.Serializable;
+
+public class Aluno implements Serializable {
     private final String nome;
     private final String telefone;
     private final String email;
@@ -9,6 +11,19 @@ public class Aluno {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
+    }
+
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
