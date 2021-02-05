@@ -46,10 +46,10 @@ public class FormularioAlunoActivity extends AppCompatActivity {
             Toast.makeText(FormularioAlunoActivity.this,
                     "Salvo",
                     Toast.LENGTH_SHORT).show();
-//                Aluno alunoCriado = preencheAluno();
-//                salva(alunoCriado);
             preencheAluno();
             dao.edita(aluno);
+            Intent intent = new Intent(this, ListaAlunosActivity.class);
+            startActivity(intent);
 
         });
     }
@@ -66,7 +66,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         campoEmail = findViewById(R.id.acitivity_formulario_aluno_email);
     }
 
-    private void preencheAluno () {
+    private void preencheAluno() {
         String nome = campoNome.getText().toString();
         String telefone = campoTelefone.getText().toString();
         String email = campoEmail.getText().toString();
