@@ -42,18 +42,15 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void configuraBotaoSalvar() {
         Button botaoSalvar = findViewById(R.id.acitivity_formulario_aluno_botao_salvar);
-        botaoSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(FormularioAlunoActivity.this,
-                        "Salvo",
-                        Toast.LENGTH_SHORT).show();
+        botaoSalvar.setOnClickListener(view -> {
+            Toast.makeText(FormularioAlunoActivity.this,
+                    "Salvo",
+                    Toast.LENGTH_SHORT).show();
 //                Aluno alunoCriado = preencheAluno();
 //                salva(alunoCriado);
-                preencheAluno();
-                dao.edita(aluno);
+            preencheAluno();
+            dao.edita(aluno);
 
-            }
         });
     }
 
