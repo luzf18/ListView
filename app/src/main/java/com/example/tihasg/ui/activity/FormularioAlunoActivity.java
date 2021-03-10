@@ -2,22 +2,23 @@ package com.example.tihasg.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tihasg.R;
 import com.example.tihasg.dao.AlunoDAO;
 import com.example.tihasg.model.Aluno;
 
-import java.io.Serializable;
-
 public class FormularioAlunoActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Novo Contato";
+    private static final String TITULO_APPBAR_NOVO_ALUNO = TITULO_APPBAR;
+    public static final String CHAVE_ALUNO = "aluno";
+    private static final String TITULO_APPBAR_EDITA_ALUNO = "Edita aluno";
     private EditText campoNome;
     private EditText campoTelefone;
     private EditText campoEmail;
@@ -28,41 +29,51 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
-        setTitle(TITULO_APPBAR);
         inicialiacaoDosCampos();
-        configuraBotaoSalvar();
-
-
-        Intent dados = getIntent();
-        if (dados.hasExtra("aluno")) {
-            aluno = (Aluno) dados.getSerializableExtra("aluno");
-            campoNome.setText(aluno.getNome());
-            campoTelefone.setText(aluno.getTelefone());
-            campoEmail.setText(aluno.getEmail());
-        } else {
-            aluno = new Aluno();
-        }
-
+        carregaAluno();
     }
 
-    private void configuraBotaoSalvar() {
-        Button botaoSalvar = findViewById(R.id.acitivity_formulario_aluno_botao_salvar);
-        botaoSalvar.setOnClickListener(view -> {
-            Toast.makeText(FormularioAlunoActivity.this,
-                    "Salvo",
-                    Toast.LENGTH_SHORT).show();
-            preencheAluno();
-            if (aluno.temIdValido()) {
-                dao.edita(aluno);
-            } else {
-                {
-                    dao.salva(aluno);
-                }
-                finish();
-                Intent intent = new Intent(this, ListaAlunosActivity.class);
-                startActivity(intent);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater()
+                .inflate(R.menu.activity_formulario_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.activity_formulario_menu_salvar){
+            finalizaFormulario();
+    }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void carregaAluno() {
+        Intent dados = getIntent();
+        if (dados.hasExtra(CHAVE_ALUNO)) {
+            setTitle(TITULO_APPBAR_EDITA_ALUNO);
+            aluno = (Aluno) dados.getSerializableExtra(FormularioAlunoActivity.CHAVE_ALUNO);
+            preencheCampos();
+        } else {
+            setTitle(TITULO_APPBAR_NOVO_ALUNO);
+            aluno = new Aluno();
+        }
+    }
+
+    private void preencheCampos() {
+        campoNome.setText(aluno.getNome());
+        campoTelefone.setText(aluno.getTelefone());
+        campoEmail.setText(aluno.getEmail());
+    }
+    private void finalizaFormulario() {
+        preencheAluno();
+        if (aluno.temIdValido()) {
+            dao.edita(aluno);
+        } else {
+            dao.salva(aluno);
             }
-        });
+        finish();
     }
 
     private void inicialiacaoDosCampos() {

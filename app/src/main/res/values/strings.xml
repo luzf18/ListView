@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Tihasg</string>
+    <string name="nome">Nome</string>
+    <string name="telefone">Telefone</string>
+    <string name="email">E-mail</string>
+    <string name="salvar">Salvar</string>
+    <string name="remover">Remover</string>
+    <string name="fernando">Fernando</string>
+    <string name="_11991090427">11991090427</string>
 </resources>
